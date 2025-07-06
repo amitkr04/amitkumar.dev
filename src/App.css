@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* global.css or App.css */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Use this class for poppins text */
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.cursive-text {
+  font-family: "Comic Sans MS", cursive;
+}
