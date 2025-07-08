@@ -74,7 +74,7 @@ export const SkillList = [
   },
   {
     _id: 12,
-    name: "Tailwind CSS",
+    name: "Tailwind",
     icon: RiTailwindCssLine,
   },
   {

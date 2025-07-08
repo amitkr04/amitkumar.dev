@@ -9,7 +9,7 @@ const Projects = () => {
         className="relative container mx-auto lg:px-6 px-3 lg:py-5 py-2 text-center"
       >
         <div className="lg:px-6 px-3 py-6 mx-auto backdrop-blur-xl bg-slate-500 rounded-md  border border-slate-600/30 shadow-2xl">
-          <h1 className="font-bold text-slate-100 cursive-text lg:text-5xl text-2xl border-b-1 border-b-gray-100 inline-block lg:mb-5 mb-2">
+          <h1 className="font-bold text-slate-100 cursive-text lg:text-5xl text-3xl border-b-1 border-b-gray-100 inline-block lg:mb-5 mb-2">
             Projects
           </h1>
           {/* Project Cards Grid */}
@@ -17,7 +17,7 @@ const Projects = () => {
             {projectList.map((project) => (
               <div
                 key={project._id}
-                className="bg-slate-800/30 border border-slate-600/30 rounded-2xl shadow-lg p-4 hover:scale-[1.02] transition-all duration-300"
+                className="bg-slate-800/30 border border-slate-600/30 rounded-md shadow-lg p-4 hover:scale-[1.02] transition-all duration-300"
               >
                 <img
                   src={project.image}

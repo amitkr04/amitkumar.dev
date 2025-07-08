@@ -9,10 +9,10 @@ const Service = () => {
     <>
       <div className="relative container mx-auto lg:px-6 px-3  lg:py-5 py-2  text-center">
         <div className="lg:px-6 px-3 py-6 mx-auto backdrop-blur-xl bg-slate-500 rounded-md border border-slate-600/30 shadow-2xl">
-          <h1 className="font-bold text-slate-100 cursive-text lg:text-5xl text-2xl border-b-1 border-b-gray-100 inline-block lg:mb-5 mb-2">
+          <h1 className="font-bold text-slate-100 cursive-text lg:text-5xl text-3xl border-b-1 border-b-gray-100 inline-block lg:mb-5 mb-2">
             Our Services
           </h1>
-          <p className="text-xl text-gray-200   mx-auto leading-relaxed mb-5">
+          <p className="lg:text-xl text-base text-gray-200   mx-auto leading-relaxed mb-5">
             We offer comprehensive digital solutions to help your business grow
             and succeed <br /> in the digital landscape. From design to
             development, we have got you covered.
@@ -63,13 +63,13 @@ const Service = () => {
 
           {/* What People Say */}
           <div className="lg:px-6 px-3 py-6 mx-auto backdrop-blur-xl bg-slate-800/20 rounded-md border border-slate-600/30 shadow-2xl lg:mt-20 mt-6">
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-100   mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-100 lg:mb-4 mb-2">
               What People{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-cyan-500">
                 Say
               </span>
             </h2>
-            <p className="text-slate-100   max-w-2xl mx-auto mb-8">
+            <p className="text-slate-100   max-w-2xl mx-auto lg:mb-8 mb-2">
               Here's what colleagues and clients have to say about working with
               me.
             </p>

@@ -15,7 +15,7 @@ const Education = () => {
         className="relative container mx-auto lg:px-6 px-3 lg:py-5 py-2 text-center"
       >
         <div className="lg:px-6 px-3 py-6 mx-auto backdrop-blur-xl bg-slate-500 rounded-md  border border-slate-600/30 shadow-2xl">
-          <h1 className="font-bold text-slate-100 cursive-text lg:text-5xl text-2xl border-b-1 border-b-gray-100 inline-block lg:mb-5 mb-1">
+          <h1 className="font-bold text-slate-100 cursive-text lg:text-5xl text-3xl border-b-1 border-b-gray-100 inline-block lg:mb-5 mb-1">
             Education
           </h1>
           <VerticalTimeline>

@@ -67,7 +67,7 @@ const Contact = () => {
       >
         {/* Header Section */}
         <div className="lg:px-6 px-3 py-6 mx-auto backdrop-blur-xl bg-slate-500 rounded-md border border-slate-600/30 shadow-2xl">
-          <p className="font-semibold text-slate-100 text-sm">Get In Touch</p>
+          <p className="font-semibold text-slate-100 text-base">GET IN TOUCH</p>
           <h1 className="font-bold text-slate-100 text-3xl">
             Let's Work Together
           </h1>
@@ -81,7 +81,7 @@ const Contact = () => {
           {/* Main Grid Section */}
           <div className="grid md:grid-cols-3 gap-10 text-left">
             {/* Left: Form */}
-            <div className="md:col-span-2 rounded-xl p-6 shadow-lg bg-slate-600 border border-slate-600/30">
+            <div className="md:col-span-2 rounded-md p-6 shadow-lg bg-slate-600 border border-slate-600/30">
               <h2 className="text-xl font-semibold mb-2 text-slate-100">
                 Send a Message
               </h2>
@@ -149,7 +149,7 @@ const Contact = () => {
 
             {/* Right: Contact Info */}
             <div className="space-y-6">
-              <div className="bg-slate-600 border border-slate-600/30 p-4 rounded-xl shadow-md">
+              <div className="bg-slate-600 border border-slate-600/30 p-4 rounded-md shadow-md">
                 <h3 className="font-semibold text-lg mb-2 text-slate-100">
                   Contact Information
                 </h3>
@@ -169,7 +169,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="bg-slate-600 border border-slate-600/30 p-4 rounded-xl shadow-md">
+              <div className="bg-slate-600 border border-slate-600/30 p-4 rounded-md shadow-md">
                 <h3 className="font-semibold text-lg mb-2 text-slate-100">
                   Connect With Me
                 </h3>
@@ -201,7 +201,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="bg-slate-600 border border-slate-600/30 text-green-500 p-3 rounded-xl text-center font-medium">
+              <div className="bg-slate-600 border border-slate-600/30 text-green-500 p-3 rounded-md text-center font-medium">
                 <div className="h-2 w-2 bg-green-500 rounded-full animate-pulse"></div>
                 ✅ Available for Projects <br />
                 <span className="text-sm font-normal">

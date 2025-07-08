@@ -34,7 +34,7 @@ const Home = () => {
             <h1 className="lg:text-5xl text-3xl text-pink-500">
               <Typewriter
                 options={{
-                  strings: ["Software Engineer!", "MERN Stack Developer!"],
+                  strings: ["Software Engineer!", "MERN Stack Dev..!"],
                   autoStart: true,
                   loop: true,
                 }}

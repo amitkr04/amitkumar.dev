@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Moon, Sun } from "lucide-react";
+import { RxCross2 } from "react-icons/rx";
 
 const navigation = [
   { name: "Home", href: "home" },
@@ -15,29 +16,38 @@ const navigation = [
 ];
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Track whether the mobile menu is open
+  const [isDarkMode, setIsDarkMode] = useState(false); // Track whether dark mode is on
+  const modalRef = useRef(null); // Ref for detecting clicks outside the mobile menu
+  const navigate = useNavigate(); // React Router's navigate hook
 
+  // Toggle dark mode (state only — doesn't affect actual theme here)
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  const navigate = useNavigate();
-
+  // Handle section navigation (for anchor sections like 'home', 'about')
   const handleNavigation = (sectionId) => {
-    navigate("/", { state: { scrollTo: sectionId } });
-    setIsOpen(false);
+    navigate("/", { state: { scrollTo: sectionId } }); // Scrolls on homepage
+    setIsOpen(false); // Closes mobile menu
   };
-  // const smoothScroll = (id) => {
-  //   const element = document.getElementById(id);
-  //   if (element) {
-  //     element.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "start",
-  //     });
-  //   }
-  //   setIsOpen(false);
-  // };
+
+  // Close the menu if clicked outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setIsOpen(false); // Close menu if click outside
+      }
+    };
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    // Clean up
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-slate-500 backdrop-blur supports-[backdrop-filter]:bg-background/60 poppins">
@@ -104,29 +114,37 @@ const Header = () => {
             </button>
 
             {/* Mobile Menu */}
-            <div className="relative">
+            <div className="relative flex lg:hidden items-center  ">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="h-9 w-9 flex items-center justify-center rounded-md text-white "
               >
-                <Menu className="h-6 w-6" />
+                {isOpen ? (
+                  <RxCross2 className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
               </button>
 
               {/* Mobile Menu Content */}
               {isOpen && (
-                <div className="fixed inset-0 z-100 lg:hidden">
+                <div
+                  className="fixed inset-0 z-[100] lg:hidden  "
+                  onClick={() => setIsOpen(false)}
+                >
+                  {/* Slide-in Mobile Menu */}
                   <div
-                    className="fixed inset-0"
-                    onClick={() => setIsOpen(false)}
-                  ></div>
-                  <div className="fixed inset-y-0 right-0 w-[300px] sm:w-[400px] bg-slate-600 border-l">
-                    <div className="flex flex-col space-y-4 mt-10 p-4 bg-slate-600">
+                    ref={modalRef}
+                    className="fixed inset-y-0 right-0 flex flex-col space-y-4 mt-16 bg-red-600 w-[265px]"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="bg-slate-600 p-8 rounded-md">
                       <div className="flex items-center space-x-2 pb-4 border-b-2 border-b-white">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-purple-500   font-bold text-lg text-white">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 font-bold text-lg text-white">
                           AK
                         </div>
                         <span className="font-semibold text-lg text-white">
-                          Portfolio
+                          Amit Kumar
                         </span>
                       </div>
                       <nav className="flex flex-col space-y-2">
@@ -136,7 +154,7 @@ const Header = () => {
                               key={item.name}
                               to={item.href}
                               onClick={() => setIsOpen(false)}
-                              className="px-3 py-3 text-base font-medium     rounded-md text-white"
+                              className="px-3 py-3 text-base font-medium rounded-md text-white"
                             >
                               {item.name}
                             </Link>
@@ -147,11 +165,7 @@ const Header = () => {
                                 handleNavigation(item.href);
                                 setIsOpen(false);
                               }}
-                              // onClick={() => {
-                              //   smoothScroll(item.href);
-                              //   setIsOpen(false);
-                              // }}
-                              className="px-3 py-3 text-base font-medium  rounded-md text-left text-white"
+                              className="px-3 py-3 text-base font-medium rounded-md text-left text-white"
                             >
                               {item.name}
                             </button>
