@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, Moon, Sun } from "lucide-react";
 import { RxCross2 } from "react-icons/rx";
+import { AnimatePresence, motion } from "framer-motion";
 
 const navigation = [
   { name: "Home", href: "home" },
@@ -127,55 +128,64 @@ const Header = () => {
               </button>
 
               {/* Mobile Menu Content */}
-              {isOpen && (
-                <div
-                  className="fixed inset-0 z-[100] lg:hidden  "
-                  onClick={() => setIsOpen(false)}
-                >
-                  {/* Slide-in Mobile Menu */}
-                  <div
-                    ref={modalRef}
-                    className="fixed inset-y-0 right-0 flex flex-col space-y-4 mt-16 bg-red-600 w-[265px]"
-                    onClick={(e) => e.stopPropagation()}
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    className="fixed inset-0 z-[100] lg:hidden"
+                    onClick={() => setIsOpen(false)}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                   >
-                    <div className="bg-slate-600 p-8 rounded-md">
-                      <div className="flex items-center space-x-2 pb-4 border-b-2 border-b-white">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 font-bold text-lg text-white">
-                          AK
+                    {/* Slide-in Mobile Menu */}
+                    <motion.div
+                      ref={modalRef}
+                      initial={{ x: "100%" }}
+                      animate={{ x: 0 }}
+                      exit={{ x: "100%" }}
+                      transition={{ type: "tween", duration: 0.3 }}
+                      className="fixed inset-y-0 right-0 flex flex-col space-y-4 mt-16 bg-red-600 w-[265px]"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="bg-slate-600 p-8 rounded-md">
+                        <div className="flex items-center space-x-2 pb-4 border-b-2 border-b-white">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-950 font-bold text-lg text-white">
+                            AK
+                          </div>
+                          <span className="font-semibold text-lg text-white">
+                            Amit Kumar
+                          </span>
                         </div>
-                        <span className="font-semibold text-lg text-white">
-                          Amit Kumar
-                        </span>
+                        <nav className="flex flex-col space-y-2">
+                          {navigation.map((item) =>
+                            item.href.startsWith("/") ? (
+                              <Link
+                                key={item.name}
+                                to={item.href}
+                                onClick={() => setIsOpen(false)}
+                                className="px-3 py-3 text-base font-medium rounded-md text-white"
+                              >
+                                {item.name}
+                              </Link>
+                            ) : (
+                              <button
+                                key={item.name}
+                                onClick={() => {
+                                  handleNavigation(item.href);
+                                  setIsOpen(false);
+                                }}
+                                className="px-3 py-3 text-base font-medium rounded-md text-left text-white"
+                              >
+                                {item.name}
+                              </button>
+                            )
+                          )}
+                        </nav>
                       </div>
-                      <nav className="flex flex-col space-y-2">
-                        {navigation.map((item) =>
-                          item.href.startsWith("/") ? (
-                            <Link
-                              key={item.name}
-                              to={item.href}
-                              onClick={() => setIsOpen(false)}
-                              className="px-3 py-3 text-base font-medium rounded-md text-white"
-                            >
-                              {item.name}
-                            </Link>
-                          ) : (
-                            <button
-                              key={item.name}
-                              onClick={() => {
-                                handleNavigation(item.href);
-                                setIsOpen(false);
-                              }}
-                              className="px-3 py-3 text-base font-medium rounded-md text-left text-white"
-                            >
-                              {item.name}
-                            </button>
-                          )
-                        )}
-                      </nav>
-                    </div>
-                  </div>
-                </div>
-              )}
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
