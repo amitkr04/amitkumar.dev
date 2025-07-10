@@ -1,10 +1,12 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
 import { CiMail } from "react-icons/ci";
-import image from "../assets/profile-amit.jpg";
+import image from "../assets/profile-amit-optimized.webp";
 import { MdOutlineFileDownload } from "react-icons/md";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Home = () => {
   const location = useLocation();
@@ -74,10 +76,12 @@ const Home = () => {
             <div className="absolute -bottom-8 -left-8 w-12 h-12 bg-pink-500/20 rounded-full animate-bounce delay-2000"></div>
 
             <div className="relative w-70 h-70 lg:w-96 lg:h-96">
-              <img
+              <LazyLoadImage
                 src={image}
                 alt="Amit Kumar"
+                effect="blur"
                 className="rounded-full object-cover border-4 border-white/10 shadow-2xl w-full h-full"
+                wrapperClassName="w-full h-full"
               />
             </div>
           </div>
