@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Menu, Moon, Sun } from "lucide-react";
 import { RxCross2 } from "react-icons/rx";
 import { AnimatePresence, motion } from "framer-motion";
+import { CgProfile } from "react-icons/cg";
 
 const navigation = [
   { name: "Home", href: "home" },
@@ -19,6 +20,7 @@ const navigation = [
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false); // Track whether the mobile menu is open
   const [isDarkMode, setIsDarkMode] = useState(false); // Track whether dark mode is on
+  const [showProfileButton, setShowProfileButton] = useState(false);
   const modalRef = useRef(null); // Ref for detecting clicks outside the mobile menu
   const navigate = useNavigate(); // React Router's navigate hook
 
@@ -50,6 +52,12 @@ const Header = () => {
     };
   }, [isOpen]);
 
+  const handleNavClick = (href, name) => {
+    handleNavigation(href); // Your existing navigation handler
+    setIsOpen(false); // Add the menu close here
+    setShowProfileButton(name === "Blogs"); // Show profile only for Blogs
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-slate-500 backdrop-blur supports-[backdrop-filter]:bg-background/60 poppins">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,13 +80,14 @@ const Header = () => {
                   key={item.name}
                   to={item.href}
                   className="px-3 py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground hover:bg-accent rounded-md text-white"
+                  onClick={() => handleNavClick(item.href, item.name)}
                 >
                   {item.name}
                 </Link>
               ) : (
                 <button
                   key={item.name}
-                  onClick={() => handleNavigation(item.href)}
+                  onClick={() => handleNavClick(item.href, item.name)}
                   className="px-3 py-2 text-base font-medium text-muted-foreground transition-colors hover:text-foreground hover:bg-accent rounded-md text-white cursor-pointer"
                 >
                   {item.name}
@@ -99,6 +108,14 @@ const Header = () => {
                 <Moon className="h-6 w-6" />
               )}
             </button>
+            {showProfileButton && (
+              <button
+                onClick={() => navigate("/blog/register")}
+                className="h-9 w-9 flex items-center justify-center rounded-md hover:bg-accent text-white cursor-pointer"
+              >
+                <CgProfile className="h-6 w-6" />
+              </button>
+            )}
           </div>
 
           {/* Mobile Actions */}
@@ -113,6 +130,15 @@ const Header = () => {
                 <Moon className="h-6 w-6" />
               )}
             </button>
+
+            {showProfileButton && (
+              <button
+                onClick={() => navigate("/register")}
+                className="h-9 w-9 flex items-center justify-center rounded-md hover:bg-accent text-white cursor-pointer"
+              >
+                <CgProfile className="h-6 w-6" />
+              </button>
+            )}
 
             {/* Mobile Menu */}
             <div className="relative flex lg:hidden items-center  ">
@@ -162,7 +188,9 @@ const Header = () => {
                               <Link
                                 key={item.name}
                                 to={item.href}
-                                onClick={() => setIsOpen(false)}
+                                onClick={() =>
+                                  handleNavClick(item.href, item.name)
+                                }
                                 className="px-3 py-3 text-base font-medium rounded-md text-white"
                               >
                                 {item.name}
@@ -170,10 +198,9 @@ const Header = () => {
                             ) : (
                               <button
                                 key={item.name}
-                                onClick={() => {
-                                  handleNavigation(item.href);
-                                  setIsOpen(false);
-                                }}
+                                onClick={() =>
+                                  handleNavClick(item.href, item.name)
+                                }
                                 className="px-3 py-3 text-base font-medium rounded-md text-left text-white"
                               >
                                 {item.name}
