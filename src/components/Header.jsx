@@ -133,7 +133,7 @@ const Header = () => {
 
             {showProfileButton && (
               <button
-                onClick={() => navigate("/register")}
+                onClick={() => navigate("/blog/register")}
                 className="h-9 w-9 flex items-center justify-center rounded-md hover:bg-accent text-white cursor-pointer"
               >
                 <CgProfile className="h-6 w-6" />
